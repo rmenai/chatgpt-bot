@@ -24,18 +24,25 @@ class Channels(BaseSettings):
         env_prefix = "CHANNEL_"
 
 
+class Chat(BaseSettings):
+    """Chat gpt config."""
+
+    session: str
+    email: str = ""
+    password: str = ""
+
+    class Config:
+        """The Pydantic settings configuration."""
+
+        env_file = ".env"
+        env_prefix = "GPT_"
+
+
 class Client(BaseSettings):
     """The API settings."""
 
     name: str = "Bot"
     token: str
-
-    @validator("token")
-    def check_token_format(cls, v: str) -> str:
-        """Validate discord tokens format."""
-        pattern = re.compile(r".{24}\..{6}\..{27}")
-        assert pattern.fullmatch(v), f"Discord token must follow >> {pattern.pattern} << pattern."
-        return v
 
     class Config:
         """The Pydantic settings configuration."""
@@ -62,6 +69,7 @@ class Global(BaseSettings):
 
     client: Client = Client()
     channels: Channels = Channels()
+    chat: Chat = Chat()
     roles: Roles = Roles()
 
     dev_guild_ids: list[int] = []
