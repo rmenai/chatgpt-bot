@@ -23,7 +23,7 @@ class Impersonate(commands.Cog):
 
     message = SlashCommandGroup(
         "msg", "Talk and send messages under the bot's name.",
-        guild_ids=settings.dev_guild_ids
+        guild_ids=settings.guild_ids
     )
 
     async def fetch_message(self, guild_id: int, channel_id: int, msg_id: int) -> Message:

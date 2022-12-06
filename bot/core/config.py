@@ -42,6 +42,7 @@ class Client(BaseSettings):
     """The API settings."""
 
     name: str = "Bot"
+    owner: int = 0
     token: str
 
     class Config:
